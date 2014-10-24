@@ -1,10 +1,11 @@
 from gatlin.extensions import db, cache
 from datetime import datetime
+from flask.ext.login import UserMixin
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class User(db.Model):
+class User(db.Model,UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

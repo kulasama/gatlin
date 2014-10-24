@@ -76,14 +76,14 @@
                         </div>
                     {% else %}
                         <div class="btn-group navbar-btn navbar-right">
-                            <a class="btn btn-primary" href="{{ url_for('user.sign_in') }}">
+                            <a class="btn btn-primary" href="{{ url_for('user.signin') }}">
                                 <span class="fa fa-user"></span> Login
                             </a>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url_for('user.sign_up') }}">Register</a></li>
+                                <li><a href="{{ url_for('user.signup') }}">Register</a></li>
                               
                             </ul>
                         </div>
