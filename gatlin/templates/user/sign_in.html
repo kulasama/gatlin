@@ -1,33 +1,29 @@
 {% set page_title = "Sign In" %}
 
 {% extends "layout.html" %}
-{% from "macros.html" import horizontal_field %}
+
 {% block content %}
 
 
-中文
-<form class="form-horizontal" role="form" method="POST">
-    <h2>Login</h2>
-    <hr>
-    {{ form.hidden_tag() }}
-    {{ horizontal_field(form.login)}}
-    {{ horizontal_field(form.password)}}
+<form class="pure-form pure-form-aligned" >
 
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            <div class="checkbox">
-                <label>
-                    {{ form.remember_me }} Remember Me
-                </label>
-            </div>
+    <fieldset>
+        <legend>Sign In</legend>
+        {{ form.hidden_tag() }}
+     
+        <div class="pure-control-group">
+            <label for="email">用户名</label>
+            {{ form.login }}
+        </div>  
+        <div class="pure-control-group">
+            <label for="password">密码</label>
+            {{ form.password }}
         </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-success">Login</button>
+        <div class="pure-controls">
+            <label class="pure-checkbox">{{ form.remember_me }} Remember Me </label>
+            <button type="submit" class="pure-buttion pure-botton-primary">Login</button>
         </div>
-    </div>
-</form>
+    </fieldset>
+</  form>
 
 {% endblock %}
