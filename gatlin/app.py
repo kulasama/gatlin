@@ -1,7 +1,7 @@
 from flask import Flask, request
 from gatlin.user.views import user
 import os
-from gatlin.extensions import db
+from gatlin.extensions import db,login_manager,plugin_manager
 import logging
 import logging.handlers  
 
@@ -29,6 +29,8 @@ def configure_extensions(app):
 
     # Flask-SQLAlchemy
     db.init_app(app)
+    login_manager.init_app(app)
+    plugin_manager.init_app(app)
 
 
 def configure_blueprints(app):

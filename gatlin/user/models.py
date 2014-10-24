@@ -36,3 +36,29 @@ class User(db.Model):
     def set_password(self, raw_password):
         """Generates a password hash for the provided password"""
         self.password = generate_password_hash(raw_password)
+
+
+    def check_password(self, password):
+        """Check passwords. If passwords match it returns true, else false"""
+
+        if self.password is None:
+            return False
+        return check_password_hash(self.password, password)
+
+    @classmethod
+    def authenticate(cls, login, password):
+        """A classmethod for authenticating users
+        It returns true if the user exists and has entered a correct password
+
+        :param login: This can be either a username or a email address.
+
+        :param password: The password that is connected to username and email.
+        """
+
+        user = cls.query.filter(User.username == login).first()
+
+        if user:
+            authenticated = user.check_password(password)
+        else:
+            authenticated = False
+        return user, authenticated
