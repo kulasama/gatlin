@@ -5,6 +5,8 @@ from gatlin.extensions import db,login_manager,plugin_manager
 import logging
 import logging.handlers  
 
+from gatlin.user.models import User
+
 def create_app(config=None):
     """
     Creates the app.
@@ -29,8 +31,18 @@ def configure_extensions(app):
 
     # Flask-SQLAlchemy
     db.init_app(app)
-    login_manager.init_app(app)
+    
     plugin_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(id):
+        """
+        Loads the user. Required by the `login` extension
+        """
+        user = db.session.query(User).filter(User.id == id).first()
+        return user
+
+    login_manager.init_app(app)
 
 
 def configure_blueprints(app):

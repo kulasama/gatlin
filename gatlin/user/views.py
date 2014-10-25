@@ -12,7 +12,7 @@ from flask import render_template
 user = Blueprint("user", __name__)
 
 @signout_required
-@user.route("/signin/")
+@user.route("/signin/",methods=["GET","POST"])
 def signin():
     form = SigninForm(request.form)
     if form.validate_on_submit():
@@ -21,17 +21,18 @@ def signin():
 
         if user and authenticated:
             login_user(user, remember=form.remember_me.data)
-            return redirect(request.args.get("next") or
-                            url_for("forum.index"))
+            return redirect(url_for("user.profile",username=current_user.username))
 
         flash(("Wrong username or password"), "danger")
+    
     return render_template("user/signin.html", form=form)
+    
 
 
-
-@signout_required
 @user.route("/signup/",methods=['GET', 'POST'])
+@signout_required
 def signup():
+    print "a2"
     form = SignupForm(request.form)
     if form.validate_on_submit():
         user = form.save()
