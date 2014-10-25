@@ -18,6 +18,7 @@
 *.log
 *.sql
 *.sqlite
+*.sqlite3
 whoosh_index
 
 # OS generated files #
