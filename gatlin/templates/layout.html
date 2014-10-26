@@ -13,7 +13,27 @@
 
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static',filename='css/pure-min.css') }}">
+        <style>
+            .home-menu.pure-menu-open {
+                background: #2d3e50;
+            }
 
+            .home-menu a {
+                color: #6FBEF3;
+            }
+
+            .home-menu .pure-menu-selected a {
+                color: white;
+            }
+
+            .home-menu li a:hover,
+            .home-menu li a:focus {
+                background: none;
+                border: none;
+                color: #AECFE5;
+            }
+
+        </style>
 
         {% block css %}
         {% endblock %}
@@ -22,17 +42,17 @@
     <body>
         {% block navigation %}
         <div id="header" class="header">
-            <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
                 <a class="pure-menu-heading" href="">Gatlin</a>
                 
                 <ul>
-                    <li class="pure-menu-selected">
+                    <li>
                         <form class="pure-form">
                             <input type="text" class="pure-input-rounded" placeholder="搜索 内容/用户">
                         </form>
                     </li>
                     <li><a href="#">Tour</a></li>
-                    <li><a href="#">Sign Up</a></li>
+                    <li class="pure-menu-selected"><a href="#">Sign Up</a></li>
                 </ul>
             </div>
         </div> 

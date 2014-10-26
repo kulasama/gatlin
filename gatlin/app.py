@@ -1,6 +1,6 @@
 from flask import Flask, request
 from gatlin.user.views import user
-from gatlin.portal.views import portal
+from gatlin.network.views import network
 import os
 from gatlin.extensions import db,login_manager,plugin_manager
 import logging
@@ -48,7 +48,8 @@ def configure_extensions(app):
 
 def configure_blueprints(app):
     app.register_blueprint(user, url_prefix=app.config["USER_URL_PREFIX"])
-    app.register_blueprint(portal)
+    app.register_blueprint(network)
+
 
 
 

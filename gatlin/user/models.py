@@ -63,3 +63,15 @@ class User(db.Model,UserMixin):
         else:
             authenticated = False
         return user, authenticated
+
+
+class Connect(db.Model):
+    __tablename__ = "connects"
+
+    id = db.Column(db.Integer, primary_key=True)
+    connecter = db.Column(db.Integer)
+    connected = db.Column(db.Integer)
+    status = db.Column(db.String(200))
+
+
+
