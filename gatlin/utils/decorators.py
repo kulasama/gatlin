@@ -16,8 +16,6 @@ def signin_required(f):
 def signout_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        print "a1"
-        print "current:",current_user
         if current_user is not None and current_user.is_authenticated():
             return redirect(url_for("user.profile"))
         return f(*args, **kwargs)
