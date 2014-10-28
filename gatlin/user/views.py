@@ -32,7 +32,6 @@ def signin():
 @user.route("/signup/",methods=['GET', 'POST'])
 @signout_required
 def signup():
-    print "a2"
     form = SignupForm(request.form)
     if form.validate_on_submit():
         user = form.save()

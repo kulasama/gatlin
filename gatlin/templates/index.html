@@ -39,6 +39,11 @@
 </div>
 </div>
 
+
+<div id="feeds_container" ng-controller="FeedsControlller">
+
+</div>
+
 {% endblock %}
 
 {% block javascript %}
@@ -46,12 +51,11 @@
 
 
 angular.module('gatlin', []).controller('PostStatusController', function($scope, $http) {
-     
      $scope.postStatus = function() {
-        console.log("post status")
-        $http.post("/status/",{"status":$scope.editorText}).success(function(){ console.log("success")})
+        $http.post("/status/",{"status":$scope.editorText}).success(function(){ 
+            $scope.editorText = ""
+        })
      }
-
 })
 </script>
 
