@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="gatlin">
     <head>
         <meta charset="utf-8">
         <title>
@@ -32,16 +32,54 @@
                 border: none;
                 color: #AECFE5;
             }
+            .splash-container {
+                background: #1f8dd6;
+                z-index: 1;
+                overflow: hidden;
+                /* The following styles are required for the "scroll-over" effect */
+                width: 100%;
+                height: 88%;
+                top: 0;
+                left: 0;
+                position: fixed !important;
+            }
+
+            .splash {
+                /* absolute center .splash within .splash-container */
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                position: absolute;
+                top: 100px; left: 0; bottom: 0; right: 0;
+                text-align: center;
+                text-transform: uppercase;
+            }
+
+            .container{
+                margin-top: 30px;
+            }
+
+            .footer{
+                position:absolute;
+                bottom:0px;
+            }
 
         </style>
 
         {% block css %}
         {% endblock %}
+        
+
+        <script src="{{ url_for('static',filename='js/angular/angular.min.js') }}"></script>
+        {% block javascript %}
+        
+        {% endblock %}
+    
     </head>
 
     <body>
         {% block navigation %}
-        <div id="header" class="header">
+        <div class="header">
             <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
                 <a class="pure-menu-heading" href="">Gatlin</a>
                 
@@ -60,27 +98,24 @@
 
 
             <div class="container">
+                <div class="splash">
                 {% block messages %}
                 {% endblock %}
 
                 {% block content %}
                 {% endblock %}
+                </div>
             </div> <!-- /container -->
 
             {% block footer %}
-            <div id="footer">
-                <div class="container">
-                    <p class="text-muted credit pull-left">powered by <a href="http://flask.pocoo.org">Flask</a></p>
-                    <p class="text-muted credit pull-right">&copy; 2013 - <a href="http://flaskbb.org">FlaskBB.org</a></p>
-                </div>
+            <div class="footer">
+                <p class="text-muted credit pull-left">powered by kula</p>
+                <p class="text-muted credit pull-right">&copy; 2014 - <a href="http://niaowo.me">niaowo.me</a></p>
             </div>
             {% endblock %}
 
-        {% block javascript %}
-        <script src="{{ url_for('static',filename='js/angular.min.js') }}">
-        {% endblock %}
 
-        {% block scripts %}
-        {% endblock %}
+
+
     </body>
 </html>

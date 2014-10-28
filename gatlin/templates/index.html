@@ -2,7 +2,60 @@
 
 {% extends "layout.html" %}
 
+{% block css %}
+<style>
+    #main-editor{
+        margin:0 auto;
+        width:600px;
+    
+    }
+    #editor{  
+        width:600px;
+        height:120px;
+        overflow-y:visible;
+    }
+    .editor-footer{
+        float:right;
+        margin-left: auto;
+        margin-top :10px;
+        padding :0px;
+        border:0px;
+    }
+    #button-submit{
+        margin－right :0px;
+        padding-right :0px;
+   }
+</style>
+{% endblock %}
 
 {% block content %}
-hello world
+
+<div id="main-editor" ng-controller="PostStatusController">
+<div class="editor-body">
+<textarea id="editor" ng-model="editorText"></textarea>
+</div>
+<div class="editor-footer">
+    <button type="submit" id="button-submit" class="pure-button pure-button-primary" ng-click="postStatus()">发表</button>
+</div>
+</div>
+
 {% endblock %}
+
+{% block javascript %}
+<script>
+
+
+angular.module('gatlin', []).controller('PostStatusController', function($scope, $http) {
+     
+     $scope.postStatus = function() {
+        console.log("post status")
+        $http.post("/status/",{"status":$scope.editorText}).success(function(){ console.log("success")})
+     }
+
+})
+</script>
+
+{% endblock %}
+
+
+

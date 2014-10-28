@@ -5,6 +5,11 @@ from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+
+
+
+
+
 class User(db.Model,UserMixin):
     __tablename__ = "users"
 
@@ -21,15 +26,7 @@ class User(db.Model,UserMixin):
     location = db.Column(db.String(100))
     avatar = db.Column(db.String(200))
 
-
     def save(self):
-        """Saves a user. If a list with groups is provided, it will add those
-        to the secondary groups from the user.
-
-        :param groups: A list with groups that should be added to the
-                       secondary groups from user.
-        """
-
         db.session.add(self)
         db.session.commit()
         return self

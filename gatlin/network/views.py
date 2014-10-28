@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import json
+
 from flask import Blueprint, current_app, flash, request
 from flask import render_template
 from flask.ext.login import current_user
 from gatlin.user.models import User
+from gatlin.network.models import Status
 from gatlin.utils.decorators import signin_required
 
 
@@ -12,9 +15,24 @@ network = Blueprint("network", __name__, template_folder="templates")
 
 
 @network.route("/")
+@signin_required
 def index():
     return render_template("index.html")
 
 
 
+@network.route("/status/",methods=["GET","POST"])
+@signin_required
+def create_status():
+    if request.method == "POST":
+        try:
+            form = json.loads(request.data)           
+            text = form.get("status")
+            status = Status(text=text,author=current_user.id)
+            status.save()
+    
+        except:
+            import traceback
+            traceback.print_exc()
+    return "create status success"
 
