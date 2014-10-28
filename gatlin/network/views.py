@@ -21,7 +21,7 @@ def index():
 
 
 
-@network.route("/status/",methods=["GET","POST"])
+@network.route("/status/",methods=["POST"])
 @signin_required
 def create_status():
     if request.method == "POST":
@@ -30,9 +30,20 @@ def create_status():
             text = form.get("status")
             status = Status(text=text,author=current_user.id)
             status.save()
-    
+            feed = Feed(data=request.data,author=current_user.id,feed_type=Status.FEED_TYPE)
+            feed.save()
         except:
             import traceback
             traceback.print_exc()
     return "create status success"
 
+
+@network.route("/statuses",method=["GET"])
+@signin_required
+def statuses():
+    statuses = Status.all()
+    for status in statuses:
+        print status
+    return "hello"
+
+ 

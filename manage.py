@@ -17,6 +17,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from flask.ext.script import (Manager, Shell, Server, prompt, prompt_pass,
                               prompt_bool)
 from flask.ext.migrate import MigrateCommand
+from flask import redirect
 
 from gatlin import create_app
 from gatlin.extensions import db
@@ -32,6 +33,11 @@ manager.add_command("runserver", Server("localhost", port=8080))
 
 # Migration commands
 manager.add_command('db', MigrateCommand)
+
+
+@app.route("/")
+def index():
+    return redirect("/network/")
 
 
 # Add interactive project shell

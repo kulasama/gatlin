@@ -1,9 +1,11 @@
 from gatlin.extensions import db
+from gatlin.user.models import Base
 from datetime import datetime
 
 
+# 0 status
 
-class Feed(db.Model):
+class Feed(db.Model,Base):
     __tablename__ = "feeds"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,24 +14,17 @@ class Feed(db.Model):
     created = db.Column(db.DateTime, default=datetime.utcnow())
     feed_type = db.Column(db.Integer)
 
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-        return self
 
 
-class Status(db.Model):
+class Status(db.Model,Base):
 
     __tablename__ = "statuses"
+
+    FEED_TYPE = 0
 
     id = db.Column(db.Integer,primary_key=True)
     text = db.Column(db.Text)
     author = db.Column(db.Integer)
     created = db.Column(db.DateTime,default=datetime.utcnow())
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-        return self
 
 

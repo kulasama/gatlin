@@ -7,10 +7,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
+class Base(object):
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
+
+    def all(self):
+        return db.query(self).all()
 
 
-
-class User(db.Model,UserMixin):
+class User(db.Model,UserMixin,Base):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

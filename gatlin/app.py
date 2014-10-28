@@ -48,7 +48,7 @@ def configure_extensions(app):
 
 def configure_blueprints(app):
     app.register_blueprint(user, url_prefix=app.config["USER_URL_PREFIX"])
-    app.register_blueprint(network)
+    app.register_blueprint(network,url_prefix=app.config["NETWORK_URL_PREFIX"])
 
 
 
