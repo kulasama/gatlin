@@ -52,7 +52,7 @@
 
 angular.module('gatlin', []).controller('PostStatusController', function($scope, $http) {
      $scope.postStatus = function() {
-        $http.post("/status/",{"status":$scope.editorText}).success(function(){ 
+        $http.post("/network/status/",{"status":$scope.editorText}).success(function(){ 
             $scope.editorText = ""
         })
      }

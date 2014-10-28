@@ -1,5 +1,5 @@
 from gatlin.extensions import db
-from gatlin.user.models import Base
+from gatlin.utils.common import Base
 from datetime import datetime
 
 

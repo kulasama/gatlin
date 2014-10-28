@@ -1,4 +1,5 @@
 from gatlin.extensions import db, cache
+from gatlin.utils.common import Base
 from datetime import datetime
 from flask.ext.login import UserMixin
 
@@ -7,15 +8,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
-class Base(object):
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-        return self
-
-    def all(self):
-        return db.query(self).all()
 
 
 class User(db.Model,UserMixin,Base):

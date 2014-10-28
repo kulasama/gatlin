@@ -38,7 +38,7 @@ def create_status():
     return "create status success"
 
 
-@network.route("/statuses",method=["GET"])
+@network.route("/statuses",methods=["GET"])
 @signin_required
 def statuses():
     statuses = Status.all()
