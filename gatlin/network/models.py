@@ -1,5 +1,6 @@
 from gatlin.extensions import db
 from gatlin.utils.common import Base
+from gatlin.user.models import User
 from datetime import datetime
 
 
@@ -26,5 +27,14 @@ class Status(db.Model,Base):
     text = db.Column(db.Text)
     author = db.Column(db.Integer)
     created = db.Column(db.DateTime,default=datetime.utcnow())
+
+
+    def to_dict(self):
+        user = User.filter(User.id==self.author).first()
+        return {
+            "text":self.text,
+            "author":self.author,
+            "username":user.username,
+        }
 
 

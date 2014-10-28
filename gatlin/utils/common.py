@@ -11,5 +11,10 @@ class Base(object):
         return self
 
     @classmethod
+    def filter(cls,*kwargs):
+        return db.session.query(cls).filter(*kwargs)
+
+
+    @classmethod
     def all(cls):
-        return db.query(cls).all()
+        return db.session.query(cls).all()

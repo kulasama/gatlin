@@ -42,8 +42,9 @@ def create_status():
 @signin_required
 def statuses():
     statuses = Status.all()
+    data = []
     for status in statuses:
-        print status
-    return "hello"
+        data.append(status.to_dict())
+    return json.dumps(data)
 
  
