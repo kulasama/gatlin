@@ -5,7 +5,7 @@ from flask import Blueprint, current_app, flash, request
 from flask import render_template
 from flask.ext.login import current_user
 from gatlin.user.models import User
-from gatlin.network.models import Status
+from gatlin.network.models import Status,Feed
 from gatlin.utils.decorators import signin_required
 
 

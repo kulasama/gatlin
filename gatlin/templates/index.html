@@ -5,14 +5,20 @@
 {% block css %}
 <style>
     #main-editor{
+
         margin:0 auto;
         width:600px;
-    
+
     }
-    #editor{  
+    .editor-body{
+
+    }
+    #editor{
         width:600px;
         height:120px;
         overflow-y:visible;
+        resize: none;
+        box-sizing: border-box;
     }
     .editor-footer{
         float:right;
@@ -23,7 +29,8 @@
     }
     #button-submit{
         margin－right :0px;
-        padding-right :0px;
+        padding-right :5px;
+        padding-left: 5px;
    }
 </style>
 {% endblock %}
@@ -40,25 +47,32 @@
 </div>
 
 
+<div id="feeds" ng-controller="FeedsController">
+</div>
 
 {% endblock %}
 
 {% block javascript %}
 <script>
+var gatlin = angular.module('gatlin', [])
 
-
-angular.module('gatlin', []).controller('PostStatusController', function($scope, $http) {
+gatlin.controller('PostStatusController', function($scope, $http) {
      $scope.postStatus = function() {
-        $http.post("/network/status/",{"status":$scope.editorText}).success(function(){ 
+        $http.post("/network/status/",{"status":$scope.editorText}).success(function(){
             $scope.editorText = ""
         })
      }
 })
 
+gatlin.controller("FeedsController",function($scope,$http){
+    $http.get("/network/statuses").success(function(){
+        console.log("success")
+    })
+})
+
+
+
 
 </script>
 
 {% endblock %}
-
-
-
