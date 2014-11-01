@@ -52,7 +52,7 @@
 
 <div id="feeds" ng-controller="FeedsController">
     <ul ng-repeat="item in items">
-        <li>{{item.username}}</li>
+        <li>{{item.text}} </li>
     </ul>
 </div>
 
@@ -73,6 +73,7 @@ gatlin.controller('PostStatusController', function($scope, $http) {
 gatlin.controller("FeedsController",function($scope,$http){
  
     $http.get("/network/statuses").success(function(data,status,headers,config){
+        console.log(data)
         $scope.items = data
     })
 })
