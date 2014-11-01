@@ -32,6 +32,7 @@ def create_status():
             status.save()
             feed = Feed(data=request.data,author=current_user.id,feed_type=Status.FEED_TYPE)
             feed.save()
+            return json.dumps(status.to_dict())
         except:
             import traceback
             traceback.print_exc()
@@ -41,7 +42,7 @@ def create_status():
 @network.route("/statuses",methods=["GET"])
 @signin_required
 def statuses():
-    statuses = Status.all()
+    statuses = Status.query.order_by(Status.created.desc()).limit(20)
     data = []
     for status in statuses:
         data.append(status.to_dict())

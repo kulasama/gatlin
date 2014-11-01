@@ -39,21 +39,23 @@
 {% endblock %}
 
 {% block content %}
+<div  ng-controller="PostStatusController">
+    <div id="main-editor">
+        <div class="editor-body">
+            <textarea id="editor" ng-model="editorText"></textarea>
+        </div>
+        <div class="editor-footer">
+            <button type="submit" id="button-submit" class="pure-button pure-button-primary" ng-click="postStatus()">发表</button>
+        </div>
 
-<div id="main-editor" ng-controller="PostStatusController">
-<div class="editor-body">
-<textarea id="editor" ng-model="editorText"></textarea>
-</div>
-<div class="editor-footer">
-    <button type="submit" id="button-submit" class="pure-button pure-button-primary" ng-click="postStatus()">发表</button>
-</div>
-</div>
+    </div>
 
-
-<div id="feeds" ng-controller="FeedsController">
-    <ul ng-repeat="item in items">
-        <li>{{item.text}} </li>
-    </ul>
+    <div id="feeds">
+        <ul ng-repeat="item in items">
+            <li>{{item.text}} </li>
+        </ul>
+    </div>
+  
 </div>
 
 {% endblock %}
@@ -63,20 +65,22 @@
 var gatlin = angular.module('gatlin', [])
 
 gatlin.controller('PostStatusController', function($scope, $http) {
+     $scope.items = []
+     console.log("start run")
+     $http.get("/network/statuses").success(function(data,status,headers,config){
+         $scope.items = data
+     })
+
      $scope.postStatus = function() {
-        $http.post("/network/status/",{"status":$scope.editorText}).success(function(){
+        $http.post("/network/status/",{"status":$scope.editorText}).success(function(data,status,headers,config){
             $scope.editorText = ""
+            console.log($scope.items)
+            $scope.items.unshift(data)
         })
      }
+
 })
 
-gatlin.controller("FeedsController",function($scope,$http){
- 
-    $http.get("/network/statuses").success(function(data,status,headers,config){
-        console.log(data)
-        $scope.items = data
-    })
-})
 
 
 
