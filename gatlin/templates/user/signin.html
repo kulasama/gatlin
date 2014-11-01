@@ -9,18 +9,18 @@
 
     <fieldset>
         <legend>Sign In</legend>
-        {{ form.hidden_tag() }}
+        ${ form.hidden_tag() }
      
         <div class="pure-control-group">
             <label for="email">用户名</label>
-            {{ form.login }}
+            ${ form.login }
         </div>  
         <div class="pure-control-group">
             <label for="password">密码</label>
-            {{ form.password }}
+            ${ form.password }
         </div>
         <div class="pure-controls">
-            <label class="pure-checkbox">{{ form.remember_me }} Remember Me </label>
+            <label class="pure-checkbox">${ form.remember_me } Remember Me </label>
             <button type="submit" class="pure-buttion pure-botton-primary">Login</button>
         </div>
     </fieldset>

@@ -21,6 +21,7 @@ def create_app(config=None):
     configure_extensions(app)
     configure_blueprints(app)
     configure_logging(app)
+    configure_jinja2(app)
 
     return app
 
@@ -53,6 +54,9 @@ def configure_blueprints(app):
 
 
 
+def configure_jinja2(app):
+    app.jinja_env.variable_start_string = '${'
+    app.jinja_env.variable_end_string = '}' 
 
 
 def configure_logging(app):
@@ -90,3 +94,5 @@ def configure_logging(app):
     error_file_handler.setLevel(logging.ERROR)
     error_file_handler.setFormatter(formatter)
     app.logger.addHandler(error_file_handler)
+
+

@@ -43,7 +43,7 @@ class SignupForm(Form):
     def save(self):
         user = User(username=self.username.data,
                     email=self.email.data,
-                    password=self.password.data,
                     joined=datetime.utcnow())
+        user.set_password(self.password.data)                
         return user.save()
 

@@ -9,25 +9,25 @@
 
     <fieldset>
         <legend>Sign In</legend>
-        {{ form.hidden_tag() }}
+        ${ form.hidden_tag() }
      
         <div class="pure-control-group">
             <label for="username">用户名</label>
-            {{ form.username }}
+            ${ form.username }
         </div>  
 
         <div class="pure-control-group">
             <label for="email">邮箱</label>
-            {{ form.email }}
+            ${ form.email }
         </div>  
 
         <div class="pure-control-group">
             <label for="password">密码</label>
-            {{ form.password }}
+            ${ form.password }
         </div>
         <div class="pure-control-group">
             <label for="password">确认密码</label>
-            {{ form.password_confirm }}
+            ${ form.password_confirm }
         </div>
         <div class="pure-controls">
             <button type="submit" class="pure-buttion pure-botton-primary">注册</button>

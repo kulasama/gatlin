@@ -11,8 +11,8 @@
         <meta name="description" content="written by kula">
         <meta name="author" content="kula">
 
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="stylesheet" href="{{ url_for('static',filename='css/pure-min.css') }}">
+        <link rel="shortcut icon" href="${ url_for('static', filename='favicon.ico') }">
+        <link rel="stylesheet" href="${ url_for('static',filename='css/pure-min.css') }">
         <style>
             .home-menu.pure-menu-open {
                 background: #2d3e50;
@@ -70,7 +70,7 @@
         {% endblock %}
         
 
-        <script src="{{ url_for('static',filename='js/angular/angular.min.js') }}"></script>
+        <script src="${ url_for('static',filename='js/angular/angular.min.js') }"></script>
         {% block javascript %}
         
         {% endblock %}
@@ -90,7 +90,8 @@
                         </form>
                     </li>
                     <li><a href="#">Tour</a></li>
-                    <li class="pure-menu-selected"><a href="#">Sign Up</a></li>
+                    <li class="pure-menu-selected"><a href="/user/signup/">注册</a></li>
+                    <li class="pure-menu-selected"><a href="/user/signin/">登录</a></li>
                 </ul>
             </div>
         </div> 
