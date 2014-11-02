@@ -49,14 +49,14 @@ def statuses():
         data.append(status.to_dict())
     return data
 
-@network.route("/feeds",method=["GET"])
+@network.route("/feeds",methods=["GET"])
 @signin_required
 @json_wrap
 def feeds():
-    feeds = Feed.query.oerder_by(Feed.created.desc()).limit(20)
+    feeds = Feed.query.order_by(Feed.created.desc()).limit(20)
     data = []
     for feed in feeds:
-        data.append(data.to_dict())
+        data.append(feed.to_dict())
     return data
 
 

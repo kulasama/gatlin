@@ -52,7 +52,7 @@
 
     <div id="feeds">
         <ul ng-repeat="item in items">
-            <li>{{item.text}} </li>
+            <li>{{item.data.status}} </li>
         </ul>
     </div>
   
@@ -67,7 +67,7 @@ var gatlin = angular.module('gatlin', [])
 gatlin.controller('PostStatusController', function($scope, $http) {
      $scope.items = []
      console.log("start run")
-     $http.get("/network/statuses").success(function(data,status,headers,config){
+     $http.get("/network/feeds").success(function(data,status,headers,config){
          $scope.items = data
      })
 

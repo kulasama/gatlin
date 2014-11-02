@@ -21,7 +21,7 @@ class Feed(db.Model,Base):
     def to_dict(self):
         user = User.filter(User.id==self.author).first()
         return {
-            "data":json.loads(data),
+            "data":json.loads(self.data),
             "author":self.author,
             "username":user.username,
             "feed_type":self.feed_type
