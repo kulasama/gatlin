@@ -3,6 +3,8 @@ from gatlin.utils.common import Base
 from gatlin.user.models import User
 from datetime import datetime
 
+import json
+
 
 # 0 status
 
@@ -15,6 +17,15 @@ class Feed(db.Model,Base):
     created = db.Column(db.DateTime, default=datetime.utcnow())
     feed_type = db.Column(db.Integer)
 
+
+    def to_dict(self):
+        user = User.filter(User.id==self.author).first()
+        return {
+            "data":json.loads(data),
+            "author":self.author,
+            "username":user.username,
+            "feed_type":self.feed_type
+        }
 
 
 class Status(db.Model,Base):

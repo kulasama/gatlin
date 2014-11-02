@@ -1,3 +1,4 @@
+import json
 from functools import wraps
 
 from flask import abort,redirect,url_for
@@ -20,4 +21,10 @@ def signout_required(f):
         if current_user is not None and current_user.is_authenticated():
             return redirect(url_for("user.profile"))
         return f(*args, **kwargs)
+    return decorated
+
+def json_wrap(f):
+    @wraps(f)
+    def decorated(*args,**kwargs):
+        return json.dumps(f(*args,**kwargs))
     return decorated

@@ -6,7 +6,7 @@ from flask import render_template
 from flask.ext.login import current_user
 from gatlin.user.models import User
 from gatlin.network.models import Status,Feed
-from gatlin.utils.decorators import signin_required
+from gatlin.utils.decorators import signin_required,json_wrap
 
 
 
@@ -23,6 +23,7 @@ def index():
 
 @network.route("/status/",methods=["POST"])
 @signin_required
+@json_wrap
 def create_status():
     if request.method == "POST":
         try:
@@ -32,20 +33,31 @@ def create_status():
             status.save()
             feed = Feed(data=request.data,author=current_user.id,feed_type=Status.FEED_TYPE)
             feed.save()
-            return json.dumps(status.to_dict())
+            return status.to_dict()
         except:
             import traceback
             traceback.print_exc()
-    return "create status success"
-
+    return {}
 
 @network.route("/statuses",methods=["GET"])
 @signin_required
+@json_wrap
 def statuses():
     statuses = Status.query.order_by(Status.created.desc()).limit(20)
     data = []
     for status in statuses:
         data.append(status.to_dict())
-    return json.dumps(data)
+    return data
+
+@network.route("/feeds",method=["GET"])
+@signin_required
+@json_wrap
+def feeds():
+    feeds = Feed.query.oerder_by(Feed.created.desc()).limit(20)
+    data = []
+    for feed in feeds:
+        data.append(data.to_dict())
+    return data
+
 
  
