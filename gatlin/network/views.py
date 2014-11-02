@@ -27,7 +27,7 @@ def index():
 def create_status():
     if request.method == "POST":
         try:
-            form = json.loads(request.data)           
+            form = json.loads(str(request.data,encoding = "utf-8"))           
             text = form.get("status")
             status = Status(text=text,author=current_user.id)
             status.save()

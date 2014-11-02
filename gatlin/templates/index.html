@@ -68,6 +68,7 @@ gatlin.controller('PostStatusController', function($scope, $http) {
      $scope.items = []
      console.log("start run")
      $http.get("/network/feeds").success(function(data,status,headers,config){
+         console.log(data)
          $scope.items = data
      })
 
