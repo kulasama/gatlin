@@ -24,7 +24,6 @@ def signin():
 
         flash(("Wrong username or password"), "danger")
 
-    
     return render_template("user/signin.html", form=form)
     
 
