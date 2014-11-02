@@ -18,6 +18,6 @@ def test_signup_logic(client,database):
         "password_confirm":u"123123",
     }
     r = client.post("/user/signup/",data=payload)
-    print(r.status_code)
+    assert r.status_code == 302
 
 

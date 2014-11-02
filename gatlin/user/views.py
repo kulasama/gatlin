@@ -38,7 +38,6 @@ def signup():
         login_user(user)
         flash(("Thanks for registering"), "success")
         return redirect(url_for("user.profile", username=current_user.username))
-    print(form.errors)
     return render_template("user/signup.html",form=form)
 
 
