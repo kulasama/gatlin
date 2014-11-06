@@ -6,7 +6,7 @@ from flask import render_template
 from flask.ext.login import current_user
 from gatlin.user.models import User
 from gatlin.network.models import Status,Feed
-from gatlin.utils.decorators import signin_required,json_wrap
+from gatlin.utils.decorators import signin_required,render_json
 from datetime import datetime
 
 
@@ -25,18 +25,17 @@ def index():
 
 @network.route("/status/",methods=["POST"])
 @signin_required
-@json_wrap
+@render_json
 def create_status():
     if request.method == "POST":
-        try:
-            form = json.loads(str(request.data,encoding = "utf-8"))           
-            text = form.get("status")
+        try:  
+            text = request.form.get("status")
             status = Status(text=text,author=current_user.id)
             status.save()
             feed = Feed(data=request.data,author=current_user.id,feed_type=Status.FEED_TYPE)
             feed.created = datetime.now()
             feed.save()
-            return status.to_dict()
+            return status.to_dict(),201
         except:
             import traceback
             traceback.print_exc()

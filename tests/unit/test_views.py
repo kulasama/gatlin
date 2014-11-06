@@ -1,3 +1,4 @@
+#coding:utf8
 import json
 
 from gatlin.user.models import User
@@ -33,3 +34,22 @@ def test_signin_logic(client,database):
     }
     r = client.post("/user/signin/",data=payload)
     assert r.status_code ==302
+
+def test_create_status(client,database):
+    user = User(username="kula",email="kulasama@gmail.com")
+    user.set_password("123123")
+    user.save()
+    payload = {
+        "login":"kula",
+        "password":"123123"
+    }
+    r = client.post("/user/signin/",data=payload)
+    assert r.status_code ==302
+
+    payload = {
+        "status":"test"
+    }
+    r = client.post("/network/status/",data=payload)
+    print (r.status_code)
+
+

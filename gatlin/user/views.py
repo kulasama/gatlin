@@ -21,9 +21,7 @@ def signin():
         if user and authenticated:
             login_user(user, remember=form.remember_me.data)
             return redirect(url_for("user.profile",username=current_user.username))
-
         flash(("Wrong username or password"), "danger")
-
     return render_template("user/signin.html", form=form)
     
 

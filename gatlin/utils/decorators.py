@@ -23,8 +23,14 @@ def signout_required(f):
         return f(*args, **kwargs)
     return decorated
 
-def json_wrap(f):
+def render_json(f):
     @wraps(f)
     def decorated(*args,**kwargs):
-        return json.dumps(f(*args,**kwargs))
+        returned = f(*args,**kwargs)
+        if isinstance(returned,tuple):
+            data = json.dumps(returned[0])
+            wrapped = (data,) + returned[1:] 
+            return wrapped
+        else:
+            return json.dumps(returned)
     return decorated
