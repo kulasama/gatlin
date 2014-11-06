@@ -57,7 +57,7 @@ def configure_blueprints(app):
 def configure_jinja2(app):
     app.jinja_env.variable_start_string = '${'
     app.jinja_env.variable_end_string = '}' 
-    print(dir(app.jinja_env))
+
 
 
 def configure_logging(app):

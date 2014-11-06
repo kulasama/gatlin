@@ -2,6 +2,7 @@ from gatlin.extensions import db
 from gatlin.utils.common import Base
 from gatlin.user.models import User
 from datetime import datetime
+from sqlalchemy import text
 
 import json
 
@@ -14,7 +15,7 @@ class Feed(db.Model,Base):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.Text)
     author = db.Column(db.Integer)
-    created = db.Column(db.DateTime, default=datetime.utcnow())
+    created = db.Column(db.DateTime)
     feed_type = db.Column(db.Integer)
 
 
