@@ -51,8 +51,10 @@
     </div>
 
     <div id="feeds">
-        <ul ng-repeat="item in items">
-            <li>{{item.data.status}} </li>
+        {{test}}
+        {% for feed in feeds %}
+           <li> ${feed.attr("status")} </li>
+        {% endfor %}
         </ul>
     </div>
   
@@ -64,19 +66,13 @@
 <script>
 var gatlin = angular.module('gatlin', [])
 
-gatlin.controller('PostStatusController', function($scope, $http) {
+gatlin.controller('PostStatusController', function($scope, $http,$window) {
      $scope.items = []
-     console.log("start run")
-     $http.get("/network/feeds").success(function(data,status,headers,config){
-         console.log(data)
-         $scope.items = data
-     })
 
      $scope.postStatus = function() {
         $http.post("/network/status/",{"status":$scope.editorText}).success(function(data,status,headers,config){
             $scope.editorText = ""
-            console.log($scope.items)
-            $scope.items.unshift(data)
+            $window.location.href = "/"
         })
      }
 

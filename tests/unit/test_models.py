@@ -24,3 +24,4 @@ def test_status(database):
 def test_feed(database):
     feed = Feed(data=json.dumps({"test":"hello"}),author=1,feed_type=Status.FEED_TYPE)
     feed.save()
+    assert (feed.attr("test")) == "hello"

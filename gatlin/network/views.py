@@ -17,7 +17,8 @@ network = Blueprint("network", __name__, template_folder="templates")
 @network.route("/")
 @signin_required
 def index():
-    return render_template("index.html")
+    feeds = Feed.query.order_by(Feed.created.desc()).limit(20)
+    return render_template("index.html",feeds=feeds,test="hello")
 
 
 
@@ -39,25 +40,9 @@ def create_status():
             traceback.print_exc()
     return {}
 
-@network.route("/statuses",methods=["GET"])
-@signin_required
-@json_wrap
-def statuses():
-    statuses = Status.query.order_by(Status.created.desc()).limit(20)
-    data = []
-    for status in statuses:
-        data.append(status.to_dict())
-    return data
 
-@network.route("/feeds",methods=["GET"])
-@signin_required
-@json_wrap
-def feeds():
-    feeds = Feed.query.order_by(Feed.created.desc()).limit(20)
-    data = []
-    for feed in feeds:
-        data.append(feed.to_dict())
-    return data
+
+
 
 
  

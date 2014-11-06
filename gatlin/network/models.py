@@ -27,6 +27,9 @@ class Feed(db.Model,Base):
             "feed_type":self.feed_type
         }
 
+    def attr(self,name):
+        attrs = json.loads(self.data)
+        return attrs.get(name)
 
 class Status(db.Model,Base):
 
@@ -47,5 +50,6 @@ class Status(db.Model,Base):
             "author":self.author,
             "username":user.username,
         }
+
 
 
